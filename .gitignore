@@ -109,3 +109,4 @@ venv.bak/
 /advgan/dataset/*
 /advgan/models/*
 *.pth
+.vscode/
