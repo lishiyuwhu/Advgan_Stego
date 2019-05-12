@@ -109,7 +109,7 @@ class AdvGAN_Attack:
             self.optimizer_G.zero_grad()
 
             # cal G's loss in GAN
-            pred_fake = self.netDisc(adv_images)
+            pred_fake = self.netDisc_1(adv_images)
             loss_G_fake = F.mse_loss(pred_fake, torch.ones_like(pred_fake, device=self.device))
             loss_G_fake.backward(retain_graph=True)
 
@@ -127,7 +127,7 @@ class AdvGAN_Attack:
             other, _ = torch.max((1 - onehot_labels) * probs_model - onehot_labels * 10000, dim=1)
             zeros = torch.zeros_like(other)
             loss_adv_1 = torch.max(real - other, zeros)
-            loss_adv_1 = torch.sum(loss_adv)
+            loss_adv_1 = torch.sum(loss_adv_1)
 
             # cal adv loss 2
             logits_model = self.model_2(adv_images)
@@ -138,7 +138,7 @@ class AdvGAN_Attack:
             other, _ = torch.max((1 - onehot_labels) * probs_model - onehot_labels * 10000, dim=1)
             zeros = torch.zeros_like(other)
             loss_adv_2 = torch.max(real - other, zeros)
-            loss_adv_2 = torch.sum(loss_adv)
+            loss_adv_2 = torch.sum(loss_adv_2)
 
             # maximize cross_entropy loss
             # loss_adv = -F.mse_loss(logits_model, onehot_labels)

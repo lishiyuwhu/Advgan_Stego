@@ -22,7 +22,7 @@ if __name__ == "__main__":
     target_model = MNIST_target_net().to(device)
     target_model.train()
     opt_model = torch.optim.Adam(target_model.parameters(), lr=0.0015)
-    epochs = 40
+    epochs = 20
     for epoch in range(epochs):
         loss_epoch = 0
         if epoch == 20:
